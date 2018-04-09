@@ -9,6 +9,7 @@ let canvas = document.getElementById('pixelCanvas');
 let color = document.getElementById('colorPicker');
 
 function makeGrid() {
+
 	canvas.innerHTML = "";
 	let row, col;
 	for (let i = 0; i < newHeight.value; i++) {
@@ -23,14 +24,16 @@ function makeGrid() {
 };
 
 sizePicker.addEventListener('submit',function(evt){
+	//method prevent default action from occurring
 	evt.preventDefault();
 	makeGrid();	
 });
-let cells = canvas.getElementsByTagName('td');
 
-canvas.addEventListener('click', function(){
-	canvas.style.backgroundColor = color.value;
-	console.log(color.value);
+function colorMyGrid(evt){
+	if (evt.target.nodeName==="TD"){
+		evt.target.style.backgroundColor = color.value;
+		console.log(color.value);
+	}
+}
 
-
-});
+canvas.addEventListener('click', colorMyGrid);
